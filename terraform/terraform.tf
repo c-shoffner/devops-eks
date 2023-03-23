@@ -1,8 +1,6 @@
 terraform {
 
   cloud {
-    organization = "org-rtNW3BnxpymuAhzC"
-
       workspaces {
         name = "liatrio"
     }
