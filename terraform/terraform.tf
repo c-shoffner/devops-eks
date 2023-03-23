@@ -1,9 +1,11 @@
 terraform {
   required_providers {
+
   cloud {
     organization = "org-rtNW3BnxpymuAhzC"
+
       workspaces {
-      name = "liatrio"
+        name = "liatrio"
     }
   }
     aws = {
