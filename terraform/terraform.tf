@@ -1,5 +1,4 @@
 terraform {
-  required_providers {
 
   cloud {
     organization = "org-rtNW3BnxpymuAhzC"
@@ -8,6 +7,8 @@ terraform {
         name = "liatrio"
     }
   }
+
+  required_providers {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 4.46.0"
