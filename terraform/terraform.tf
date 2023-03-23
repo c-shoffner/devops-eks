@@ -1,6 +1,7 @@
 terraform {
 
   cloud {
+    organization = "cody_test"
       workspaces {
         name = "liatrio"
     }
