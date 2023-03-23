@@ -2,8 +2,6 @@ name: "Terraform"
 
 on: 
   workflow_dispatch:
-    paths:
-    - 'terraform/**'
 
 
 
@@ -11,6 +9,9 @@ jobs:
   terraform:
     name: "Terraform"
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: terraform
     permissions:
       pull-requests: write
     steps:
