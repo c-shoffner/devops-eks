@@ -43,11 +43,6 @@ jobs:
         working-directory: ${{ env.working-directory }}
 
 
-      - name: Set Kube context
-        run : |
-          echo {{ steps.terraform.outputs.cluster_name }}
-          echo {{ steps.terraform.outputs.cluster_region }}
-          aws eks update-kubeconfig --name $cluster_name --region $cluster_region
 
 
   python_build:
