@@ -16,12 +16,12 @@ for x in values:
     name = x['attributes']['name']
     if 'cluster_name' in name:
         cluster_name = x['attributes']['value']
-        os.environ[cluster_name]
+        os.environ[cluster_name] = cluster_name
 
 
 for x in values:
     name = x['attributes']['name']
     if 'region' in name:
         cluster_region = x['attributes']['value']
-        os.environ[cluster_region]
+        os.environ[cluster_region] = cluster_region
 
