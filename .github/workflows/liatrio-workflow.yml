@@ -45,8 +45,8 @@ jobs:
 
       - name: Set Kube context
         run : |
-          cluster_name=${{ steps.apply.outputs.cluster_name }}
-          cluster_region=${{ steps.apply.outputs.cluster_region }}
+          cluster_name=${{ steps.terraform.outputs.cluster_name }}
+          cluster_region=${{ steps.terraform.outputs.cluster_region }}
           aws eks update-kubeconfig --name $cluster_name --region $cluster_region
 
 
