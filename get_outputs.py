@@ -1,6 +1,6 @@
 import requests, json, os
 
-tf_api_token = os.environ['TF_API_TOKEN']
+tf_api_token = os.getenv('TF_API_TOKEN')
 url = "https://app.terraform.io/api/v2/workspaces/ws-qam9e7EbmmEhKF6n/current-state-version?include=outputs"
 headers = {
   'Authorization': 'Bearer {tf_api_token}'
