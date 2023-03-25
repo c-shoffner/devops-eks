@@ -1,8 +1,9 @@
 import requests, json, os
 
+terraform_api = os.environ['terraform_api']
 url = "https://app.terraform.io/api/v2/workspaces/ws-qam9e7EbmmEhKF6n/current-state-version?include=outputs"
 headers = {
-  'Authorization': 'Bearer n1zjsFxZbzYAEA.atlasv1.oCOUbLJ30e7vGI2uurziynjP2BJvVYNwAnw0EvyNzig4JIhRKCBzw9MDyNsFHm89Iec'
+  'Authorization': 'Bearer {terraform_api}'
 }
 
 response = requests.request("GET", url, headers=headers, data=payload)
