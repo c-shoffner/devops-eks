@@ -1,9 +1,9 @@
 import requests, json, os
 
-terraform_api = os.environ['terraform_api']
+tf_api_token = os.environ['TF_API_TOKEN']
 url = "https://app.terraform.io/api/v2/workspaces/ws-qam9e7EbmmEhKF6n/current-state-version?include=outputs"
 headers = {
-  'Authorization': 'Bearer {terraform_api}'
+  'Authorization': 'Bearer {tf_api_token}'
 }
 
 response = requests.request("GET", url, headers=headers, data=payload)
