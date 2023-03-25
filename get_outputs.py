@@ -25,4 +25,4 @@ for x in values:
 
 env_file = os.getenv("GITHUB_ENV")
 with open(env_file, "a") as myfile:
-  myfile.write('CLUSTER_NAME={cluster_name}')
+  myfile.write(f'CLUSTER_NAME={cluster_name}')
