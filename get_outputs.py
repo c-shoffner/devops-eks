@@ -26,5 +26,5 @@ for x in values:
         os.environ[cluster_region] = cluster_region
 
 
-print(os.getenv('cluster_name'))
+print(os.getenv('CLUSTER_NAME'))
 print(os.getenv('cluster_region'))
