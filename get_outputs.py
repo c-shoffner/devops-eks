@@ -16,15 +16,13 @@ for x in values:
     name = x['attributes']['name']
     if 'cluster_name' in name:
         cluster_name = x['attributes']['value']
-        os.environ[cluster_name] = cluster_name
 
 
 for x in values:
     name = x['attributes']['name']
     if 'region' in name:
         cluster_region = x['attributes']['value']
-        os.environ[cluster_region] = cluster_region
 
-
-print(os.getenv('CLUSTER_NAME'))
-print(os.getenv('cluster_region'))
+env_file = os.getenv("GITHUB_ENV")
+with open(env_file, "a") as myfile:
+  myfile.write('CLUSTER_NAME={cluster_name}')
