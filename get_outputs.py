@@ -7,6 +7,7 @@ headers = {
 }
 
 response = requests.request("GET", url, headers=headers)
+print(resopnse)
 response_json = response.json()
 values = response_json['included']
 
