@@ -6,7 +6,7 @@ headers = {
   'Authorization': 'Bearer {tf_api_token}'
 }
 
-response = requests.request("GET", url, headers=headers, data=payload)
+response = requests.request("GET", url, headers=headers)
 response_json = response.json()
 values = response_json['included']
 
