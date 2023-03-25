@@ -38,14 +38,15 @@ jobs:
         working-directory: ${{ env.working-directory }}
 
       - name: Terraform Apply
+        id: apply
         run: terraform apply -auto-approve -input=false
         working-directory: ${{ env.working-directory }}
 
 
       - name: Set Kube context
         run : |
-          cluster_name=${{ steps.tf-outputs.outputs.cluster_name }}
-          cluster_region=${{ steps.tf-outputs.outputs.cluster_region }}
+          cluster_name=${{ steps.apply.outputs.cluster_name }}
+          cluster_region=${{ steps.apply.outputs.cluster_region }}
           aws eks update-kubeconfig --name $cluster_name --region $cluster_region
 
 
