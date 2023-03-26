@@ -29,7 +29,6 @@ for x in values:
         cluster_region = x['attributes']['value']
 
 
-if (cluster_name) & (cluster_region):
-  with open(env_file, "a") as myfile:
-    myfile.write(f'CLUSTER_NAME={cluster_name}\n')
-    myfile.write(f'CLUSETER_REGION={cluster_region}')
+with open(env_file, "a") as myfile:
+  myfile.write(f'CLUSTER_NAME={cluster_name}\n')
+  myfile.write(f'CLUSETER_REGION={cluster_region}')
