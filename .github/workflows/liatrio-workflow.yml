@@ -62,7 +62,7 @@ jobs:
           TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
         run: python get_outputs.py
 
-      - name: set kube context
+      - name: deploy to kube cluster
         env: 
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -70,6 +70,7 @@ jobs:
           CLUSTER_REGION: ${{ env.CLUSTER_REGION }}
         run: |
           aws eks update-kubeconfig --name $CLUSTER_NAME --region $CLUSTER_REGION
+          kubectl apply -f manifest.yaml
 
   python_build:
     runs-on: ubuntu-latest
