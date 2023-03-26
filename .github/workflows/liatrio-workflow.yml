@@ -101,8 +101,6 @@ jobs:
           kubectl apply -f manifest.yaml
 
       - name: set cloudflare dns
-        run: |
-          HOSTNAME=$(kubectl get svc -n liatrio-namespace -o jsonpath='{.items[0].status.loadBalancer.ingress[0].hostname}')
-          echo "HOSTNAME=${HOSTNAME} >> $GITHUB_ENV"
+        run: set_cloudflare.py
 
         
