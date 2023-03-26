@@ -1,4 +1,4 @@
-import requests, os, json
+import requests, json, os
 from kubernetes import client, config
 
 
@@ -25,7 +25,7 @@ headers = {
     'Authorization': f'Bearer {cloudflare_api},'
     }
 body = json.dumps({
-    'content': f'{output}',
+    'content': f'{hostname}',
     'name': 'liatrio',
     'proxied': false,
     'type': 'CNAME'
