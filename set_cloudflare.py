@@ -18,6 +18,10 @@ zone_id = os.getenv("ZONE_ID")
 dns_record = os.getenv("DNS_RECORD")
 cloudflare_api = os.getenv("CLOUDFLARE_API")
 
+# set hostname as env var
+with open(env_file, "a") as myfile:
+  myfile.write(f'HOSTNAME={hostname}')
+
 url = f'https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records/{dns_record}?Content-Type=application%2Fjson'
 headers = {
     'Content-Type': 'application/json',

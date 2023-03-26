@@ -105,4 +105,11 @@ jobs:
           DNS_RECORD: ${{ env.DNS_RECORD }}
         run: python set_cloudflare.py
 
-        
+  health_check:
+    runs-on: ubuntu-latest
+    needs: kube_deploy
+    steps: 
+      - name: health check
+        env:
+          HOSTNAME: ${{ env.HOSTNAME }}
+        run: python api_test.py
