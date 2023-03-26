@@ -17,21 +17,20 @@ for svc in services.items:
 zone_id = os.getenv("ZONE_ID")
 dns_record = os.getenv("DNS_RECORD")
 cloudflare_api = os.getenv("CLOUDFLARE_API")
-hostname = os.getenv("HOSTNAME")
 
 url = f'https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records/{dns_record}?Content-Type=application%2Fjson'
 headers = {
     'Content-Type': 'application/json',
-    'Authorization': f'Bearer {cloudflare_api},'
+    'Authorization': f'Bearer {cloudflare_api}'
     }
 body = json.dumps({
     'content': f'{hostname}',
     'name': 'liatrio',
-    'proxied': 'false',
+    'proxied': False,
     'type': 'CNAME'
 })
 # call cloudflare api and set dns
-response = requests.post(url, headers=headers, data=body)
+response = requests.put(url, headers=headers, data=body)
 print(response.text)
 
 
