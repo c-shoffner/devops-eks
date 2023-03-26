@@ -70,14 +70,6 @@ jobs:
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      CLUSTER_NAME: ${{ env.CLUSTER_NAME }}
-      CLUSTER_REGION: ${{ env.CLUSTER_REGION }}
-      CLOUDFLARE_API: ${{ env.CLOUDFLARE_API }}
-      ZONE_ID: ${{ env.ZONE_ID }}
-      DNS_RECORD: ${{ env.DNS_RECORD }}
-      TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-
-      
     steps:
       - name: checkout repo
         uses: actions/checkout@v2
@@ -93,14 +85,24 @@ jobs:
           pip install -r requirements.txt
 
       - name: get terraform outputs
+        env:
+          TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
         run: python get_outputs.py
 
       - name: deploy to kube cluster
+        env: 
+          CLUSTER_NAME: ${{ env.CLUSTER_NAME }}
+          CLUSTER_REGION: ${{ env.CLUSTER_REGION }}
+
         run: |
           aws eks update-kubeconfig --name $CLUSTER_NAME --region $CLUSTER_REGION
           kubectl apply -f manifest.yaml
 
       - name: set cloudflare dns
+        env: 
+          CLOUDFLARE_API: ${{ env.CLOUDFLARE_API }}
+          ZONE_ID: ${{ env.ZONE_ID }}
+          DNS_RECORD: ${{ env.DNS_RECORD }}
         run: python set_cloudflare.py
 
         
