@@ -19,6 +19,7 @@ dns_record = os.getenv("DNS_RECORD")
 cloudflare_api = os.getenv("CLOUDFLARE_API")
 
 # set hostname as env var
+env_file = os.getenv("GITHUB_ENV")
 with open(env_file, "a") as myfile:
   myfile.write(f'HOSTNAME={hostname}')
 
