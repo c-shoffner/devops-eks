@@ -1,7 +1,7 @@
 import unittest, requests, os
 
 class api_test(unittest.TestCase):
-    get_uri = os.environ.get("KUBE_URI")
+    get_uri = os.environ.get("HOSTNAME")
     uri = f"http://{get_uri}:5000/liatrio"
 
 
