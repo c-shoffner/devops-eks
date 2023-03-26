@@ -98,7 +98,7 @@ jobs:
 
       - name: set cloudflare dns
         run: |
-          HOSTNAME=kubectl get svc -n liatrio-namespace -o jsonpath='{.items[0].status.loadBalancer.ingress[0].hostname}'
+          HOSTNAME=$(kubectl get svc -n liatrio-namespace -o jsonpath='{.items[0].status.loadBalancer.ingress[0].hostname}')
           echo "HOSTNAME=${HOSTNAME} >> $GITHUB_ENV"
 
         
