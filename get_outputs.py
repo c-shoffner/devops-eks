@@ -5,25 +5,31 @@ url = "https://app.terraform.io/api/v2/workspaces/ws-qam9e7EbmmEhKF6n/current-st
 headers = {
   'Authorization': f'Bearer {tf_api_token}'
 }
-print(headers)
-response = requests.request("GET", url, headers=headers)
-print(response)
-response_json = response.json()
-values = response_json['included']
 
+try:
+  response = requests.request("GET", url, headers=headers)
+  response_json = response.json()
+except:
+  print("Cannot call Terraform Cloud API")
 
+try:
+  values = response_json['included']
+except:
+  print("Cannot find values within Terraform Cloud API")
+
+env_file = os.getenv("GITHUB_ENV")
 for x in values:
     name = x['attributes']['name']
     if 'cluster_name' in name:
         cluster_name = x['attributes']['value']
-
 
 for x in values:
     name = x['attributes']['name']
     if 'region' in name:
         cluster_region = x['attributes']['value']
 
-env_file = os.getenv("GITHUB_ENV")
-with open(env_file, "a") as myfile:
-  myfile.write(f'CLUSTER_NAME={cluster_name}\n')
-  myfile.write(f'CLUSETER_REGION={cluster_region}')
+
+if (cluster_name) & (cluster_region):
+  with open(env_file, "a") as myfile:
+    myfile.write(f'CLUSTER_NAME={cluster_name}\n')
+    myfile.write(f'CLUSETER_REGION={cluster_region}')

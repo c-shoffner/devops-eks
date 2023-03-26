@@ -42,6 +42,7 @@ jobs:
 
   python_tf_outputs:
     runs-on: ubuntu-latest
+    needs: terraform
     steps:
       - name: checkout repo
         uses: actions/checkout@v2
@@ -63,6 +64,7 @@ jobs:
 
   kube_context:
     runs-on: ubuntu-latest
+    needs: terraform
     steps:
       - name: set kube context
         run: |
