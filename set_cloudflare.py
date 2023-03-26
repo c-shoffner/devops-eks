@@ -27,7 +27,7 @@ headers = {
 body = json.dumps({
     'content': f'{hostname}',
     'name': 'liatrio',
-    'proxied': false,
+    'proxied': 'false',
     'type': 'CNAME'
 })
 # call cloudflare api and set dns
