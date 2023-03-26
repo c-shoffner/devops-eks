@@ -64,6 +64,8 @@ jobs:
 
       - name: set kube context
         env: 
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           CLUSTER_NAME: ${{ env.CLUSTER_NAME }}
           CLUSTER_REGION: ${{ env.CLUSTER_REGION }}
         run: |
