@@ -67,9 +67,10 @@ jobs:
     needs: python_tf_outputs
     steps:
       - name: set kube context
-        # env: 
-        #   CLUSTER_NAME: ${{ env.CLUSTER_NAME }}
-        #   CLUSTER_REGION: ${{ env.CLUSTER_REGION }}
+        env: 
+          echo: ${{ env.CLUSTER_NAME }}
+          CLUSTER_NAME: ${{ env.CLUSTER_NAME }}
+          CLUSTER_REGION: ${{ env.CLUSTER_REGION }}
         run: |
           aws eks update-kubeconfig --name $CLUSTER_NAME --region $CLUSTER_REGION
 
