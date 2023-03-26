@@ -64,7 +64,7 @@ jobs:
 
   kube_context:
     runs-on: ubuntu-latest
-    needs: terraform
+    needs: python_tf_outputs
     steps:
       - name: set kube context
         env: 
