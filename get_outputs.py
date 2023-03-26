@@ -22,11 +22,13 @@ for x in values:
     name = x['attributes']['name']
     if 'cluster_name' in name:
         cluster_name = x['attributes']['value']
+        print(cluster_name)
 
 for x in values:
     name = x['attributes']['name']
     if 'region' in name:
         cluster_region = x['attributes']['value']
+        print(cluster_region)
 
 
 with open(env_file, "a") as myfile:
