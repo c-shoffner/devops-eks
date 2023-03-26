@@ -109,6 +109,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: kube_deploy
     steps: 
+      - name: checkout repo
+        uses: actions/checkout@v2
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with: 
+          python-version: '3.8'
+          
       - name: health check
         env:
           HOSTNAME: ${{ env.HOSTNAME }}
