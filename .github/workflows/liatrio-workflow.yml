@@ -92,6 +92,10 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           CLUSTER_NAME: ${{ env.CLUSTER_NAME }}
           CLUSTER_REGION: ${{ env.CLUSTER_REGION }}
+          CLOUDFLARE_API: ${{ env.CLOUDFLARE_API }}
+          ZONE_ID: ${{ env.ZONE_ID }}
+          DNS_RECORD: ${{ env.DNS_RECORD }}
+
         run: |
           aws eks update-kubeconfig --name $CLUSTER_NAME --region $CLUSTER_REGION
           kubectl apply -f manifest.yaml
