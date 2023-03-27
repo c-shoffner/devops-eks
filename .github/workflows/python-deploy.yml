@@ -1,0 +1,18 @@
+# name: "Kube Deploy to EKS"
+
+# on: 
+#   workflow_dispatch:
+    
+#     env:
+#       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#       AWS_SECRET_ACCESS_KEY_ID: ${{ AWS_SECRET_ACCESS_KEY_ID }} 
+#       steps:
+#       - name: Configure AWS Credentials
+#         uses: aws-actions/configure-aws-credentials@v1
+#         with: 
+#           aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+#           aws-secret-access-key: ${{ AWS_SECRET_ACCESS_KEY_ID }}
+
+#       - name: Deploy to EKS Cluster
+#         run: |
+#           kubectl apply -f manifest.yaml 
