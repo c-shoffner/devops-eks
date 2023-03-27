@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route('/liatrio', methods=['GET'])
 def liatrio():
     message = "Automate all the things!"
-    timestamp = datetime.now()
+    timestamp = datetime.now().timestamp()
 
     payload = json.dumps({
         "message": f"{message}",
@@ -21,4 +21,4 @@ def main():
     return "Please call /liatrio for the exercise"
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5050)
