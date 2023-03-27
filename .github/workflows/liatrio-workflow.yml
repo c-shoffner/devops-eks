@@ -99,9 +99,9 @@ jobs:
 
       - name: set cloudflare dns
         env: 
-          CLOUDFLARE_API: ${{ env.CLOUDFLARE_API }}
-          ZONE_ID: ${{ env.ZONE_ID }}
-          DNS_RECORD: ${{ env.DNS_RECORD }}
+          CLOUDFLARE_API: ${{ secrets.CLOUDFLARE_API }}
+          ZONE_ID: ${{ secrets.ZONE_ID }}
+          DNS_RECORD: ${{ secrets.DNS_RECORD }}
         run: python set_cloudflare.py
 
       - name: run health check
