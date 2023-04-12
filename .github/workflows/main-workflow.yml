@@ -1,48 +1,50 @@
-name: "Liatrio Exercise"
+name: "DevOps Exercise"
 on: 
   workflow_dispatch:
 
 jobs:
-  # terraform:
-  #   name: "Terraform"
-  #   runs-on: ubuntu-latest
-  #   env:
-  #     working-directory: ./terraform
-  #   permissions:
-  #     pull-requests: write
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v3
+  terraform:
+    name: "Terraform"
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./terraform
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-  #     - name: Setup Terraform
-  #       uses: hashicorp/setup-terraform@v1
-  #       with:
-  #         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-  #     - name: Terraform Init
-  #       id: init
-  #       run: terraform init
-  #       working-directory: ${{ env.working-directory }}
+      - name: Terraform Init
+        id: init
+        run: terraform init
+        working-directory: ${{ env.working-directory }}
 
-  #     - name: Terraform Validate
-  #       id: validate
-  #       run: terraform validate -no-color
-  #       working-directory: ${{ env.working-directory }}
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+        working-directory: ${{ env.working-directory }}
 
-  #     - name: Terraform Plan
-  #       id: plan
-  #       run: terraform plan -no-color -input=false
-  #       continue-on-error: true
-  #       working-directory: ${{ env.working-directory }}
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color -input=false
+        continue-on-error: true
+        working-directory: ${{ env.working-directory }}
 
-  #     - name: Terraform Apply
-  #       id: apply
-  #       run: terraform apply -auto-approve -input=false
-  #       working-directory: ${{ env.working-directory }}
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply -auto-approve -input=false
+        working-directory: ${{ env.working-directory }}
 
   python_build:
+    name: "Python Build"
+
     runs-on: ubuntu-latest
-    # needs: terraform
+    needs: terraform
     steps:
       - name: Checkout branch
         uses: actions/checkout@v3
@@ -62,14 +64,16 @@ jobs:
           context: app
           file: app/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/liatrio_exercise:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/devops_exercise:latest
 
   kube_deploy:
     runs-on: ubuntu-latest
+    name: Kube Deploy
     needs: python_build
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      working-directory: ./jobs
     steps:
       - name: checkout repo
         uses: actions/checkout@v2
@@ -83,11 +87,13 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+        working-directory: ${{ env.working-directory }}
 
       - name: get terraform outputs
         env:
           TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-        run: python get_outputs.py
+        run: python tf_cloud_outputs.py
+        working-directory: ${{ env.working-directory }}
 
       - name: deploy to kube cluster
         env: 
@@ -103,9 +109,11 @@ jobs:
           ZONE_ID: ${{ secrets.ZONE_ID }}
           DNS_RECORD: ${{ secrets.DNS_RECORD }}
         run: python set_cloudflare.py
+        working-directory: ${{ env.working-directory }}
 
       - name: run health check
         env:
           HOSTNAME: ${{ env.HOSTNAME }}
         run: python api_test.py
+        working-directory: ${{ env.working-directory }}
 
