@@ -3,8 +3,8 @@ variable "region" {
   type        = string
   default     = "us-west-2"
 }
-variable "cluster_name"{
+variable "cluster_name" {
   description = "name for the EKS cluster"
   type        = string
-  default     = "liatrio"
+  default     = "devops"
 }
